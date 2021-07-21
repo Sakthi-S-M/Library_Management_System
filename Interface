@@ -1,0 +1,7 @@
+import java.util.List;
+public interface operate {
+void select(List<Book> books);
+void delete(List<Book> books);
+void add(List<Book> books);
+void list(List<Book> books);
+}
