@@ -1,0 +1,86 @@
+import java.util.*;
+public class Root extends Person implements operate{
+Root(String name, String sex, int age) {
+super(name, sex, age);
+}
+Scanner sc = new Scanner(System.in);
+public void operate(List<Book> books, int i) {
+switch (i) {
+case 1://sort out Books
+sort(books);
+break;
+case 2://Check Books
+select(books);
+break;
+case 3://Add Books
+add(books);
+break;
+case 4://Delete Books
+delete(books);
+break;
+case 5:
+list(books);
+break;
+default:
+System.out.println("The input is wrong!");
+}
+}
+public void sort(List<Book> books) {
+System.out.println("Books in the library are sorted by price:");
+class BookComparator implements Comparator<Book>{
+public int compare(Book o1, Book o2) {
+return (int)(o1.getPrice() - o2.getPrice());
+}
+}
+Collections.sort(books, new BookComparator());
+System.out.println("The finishing is over!");
+
+}
+public void select(List<Book> books) {
+System.out.println("Please enter the title of the book for query:");
+String name = sc.next();
+if(name != null) {
+for (Book book : books) {
+if (book.getName().equals(name)) {
+System.out.println("There is this book!");
+System.out.println("Book Title:"+book.getName()+"Author:"+book.getAuthor()+
+"Price:"+book.getPrice()+"Classification:"+book.getCategory()+"Status:"+book.isState());
+return;
+}
+}
+System.out.println("There is no such book at the moment!");
+}
+}
+public void delete(List<Book> books) {
+System.out.println("Please enter the title of the book to be deleted:");
+String str = sc.next();
+if(str != null) {
+for(Book book : books) {
+if(book.getName().equals(str)) {
+books.remove(book);
+System.out.println("successfully deleted!");
+return;
+}
+}
+System.out.println("No such book!");
+}
+}
+public void add(List<Book> books) {
+System.out.println("Please enter the title of the book:");
+String name = sc.next();
+System.out.println("Please enter the Author:");
+String author = sc.next();
+System.out.println("Please enter the price:");
+double price = sc.nextDouble();
+System.out.println("Please enter a category:");
+String category = sc.next();
+books.add(new Book(name,author,price,category,true));
+}
+public void list(List<Book> books) {
+System.out.println("The book list is as follows:"); //Print the Book array
+for (Book book : books) {
+System.out.println("Book Title:"+book.getName()+"Author:"+book.getAuthor()+
+"Price:"+book.getPrice()+"Classification:"+book.getCategory()+"Status:"+book.isState());
+}
+}
+}
