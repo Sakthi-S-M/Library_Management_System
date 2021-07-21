@@ -1,0 +1,73 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+public class Library {
+private List<Book> books = new ArrayList<>(){
+{
+add(new Book("Journey to the West", "Wu Chengen", 10, "masterpiece", true));
+add(new Book("A Dream of Red Mansions", "Cao Xueqin", 20, "masterpiece", true));
+add(new Book("Three Kingdoms", "Luo Guanzhong", 15, "masterpiece", true));
+add(new Book("Small Ming classmate", "Xiao Ming", 5, "magazine", true));
+}};
+Scanner sc = new Scanner(System.in);
+public void login(){
+int count = 0;
+Person p = null;
+while(count<2){
+System.out.println("-----Library management system-----");
+System.out.println("Please log in: 1. Ordinary user 2. Administrator 3. Log out of the
+system");
+int n = sc.nextInt();
+if(n == 3){
+return;
+}
+switch(n){
+case 1:
+System.out.println("Please type in your name:");
+String Uname = sc.next();
+System.out.println("Please enter gender:");
+String Usex = sc.next();
+System.out.println("Please enter age:");
+int Uage = sc.nextInt();
+p = new User(Uname,Usex,Uage); //Construct normal user object
+System.out.println("login successful!");
+System.out.println("The current user is a normal user:"+"Name:" + p.getName() + "
+"+"gender:" + p.getSex() + " "+"age"+ p.getAge());
+while (true) {
+System.out.println("Please enter your operation: 1. Search for books 2. Borrow
+books 3. Return books 4. Display the book list 5. Exit");
+int i = sc.nextInt();
+if (i == 5) {
+System.out.println("You have successfully logged out!");
+break;
+}else {
+p.operate(books,i);
+}
+}
+break;
+case 2:
+System.out.println("Please enter the name of the administrator:");
+String Rname = sc.next();
+System.out.println("Please enter gender:");
+String Rsex = sc.next();
+System.out.println("Please enter age:");
+int Rage = sc.nextInt();
+p = new Root(Rname,Rsex,Rage);
+System.out.println("login successful!");
+System.out.println("Current Administrator:"+"Name:" + p.getName() + "
+"+"gender:" + p.getSex() + " "+"age" + p.getAge());
+while (true) {
+System.out.println("Please enter your operation: 1. Organize books 2. View books
+3. Add books 4. Delete books 5. Display the book list 6. Exit");
+int j = sc.nextInt();
+if (j == 6) {
+System.out.println("You have successfully logged out!");
+break;
+}else{
+p.operate(books,j);
+}
+} break;
+}
+}
+}
+}
